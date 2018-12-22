@@ -56,12 +56,14 @@ FactoryBot.define do
       cached_votes_up { Proposal.votes_needed_for_success + 100 }
     end
 
-    trait :draft do
-      published_at nil
-    end
-
     trait :retired do
       retired_at { Time.current }
+      retired_reason "unfeasible"
+      retired_explanation "Retired explanation"
+    end
+
+    trait :draft do
+      published_at nil
     end
 
     trait :published do
