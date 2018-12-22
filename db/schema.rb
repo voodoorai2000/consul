@@ -1173,15 +1173,9 @@ ActiveRecord::Schema.define(version: 20190429125842) do
   add_index "proposal_translations", ["proposal_id"], name: "index_proposal_translations_on_proposal_id", using: :btree
 
   create_table "proposals", force: :cascade do |t|
-<<<<<<< HEAD
-    t.string   "title",               limit: 80
-    t.text     "description"
-=======
     t.string   "deprecated_title",               limit: 80
     t.text     "deprecated_description"
     t.string   "deprecated_question"
-    t.string   "external_url"
->>>>>>> Rename proposal deprecated fields
     t.integer  "author_id"
     t.datetime "hidden_at"
     t.integer  "flags_count",                    default: 0
@@ -1212,24 +1206,9 @@ ActiveRecord::Schema.define(version: 20190429125842) do
     t.index ["geozone_id"], name: "index_proposals_on_geozone_id", using: :btree
     t.index ["hidden_at"], name: "index_proposals_on_hidden_at", using: :btree
     t.index ["hot_score"], name: "index_proposals_on_hot_score", using: :btree
-    t.index ["summary"], name: "index_proposals_on_summary", using: :btree
-    t.index ["title"], name: "index_proposals_on_title", using: :btree
     t.index ["tsv"], name: "index_proposals_on_tsv", using: :gin
   end
 
-<<<<<<< HEAD
-=======
-  add_index "proposals", ["author_id", "hidden_at"], name: "index_proposals_on_author_id_and_hidden_at", using: :btree
-  add_index "proposals", ["author_id"], name: "index_proposals_on_author_id", using: :btree
-  add_index "proposals", ["cached_votes_up"], name: "index_proposals_on_cached_votes_up", using: :btree
-  add_index "proposals", ["community_id"], name: "index_proposals_on_community_id", using: :btree
-  add_index "proposals", ["confidence_score"], name: "index_proposals_on_confidence_score", using: :btree
-  add_index "proposals", ["geozone_id"], name: "index_proposals_on_geozone_id", using: :btree
-  add_index "proposals", ["hidden_at"], name: "index_proposals_on_hidden_at", using: :btree
-  add_index "proposals", ["hot_score"], name: "index_proposals_on_hot_score", using: :btree
-  add_index "proposals", ["tsv"], name: "index_proposals_on_tsv", using: :gin
-
->>>>>>> Rename proposal deprecated fields
   create_table "related_content_scores", force: :cascade do |t|
     t.integer "user_id"
     t.integer "related_content_id"
