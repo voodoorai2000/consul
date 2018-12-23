@@ -64,6 +64,14 @@ module ProposalsHelper
     proposals_current_view == "default" ? "minimal" : "default"
   end
 
+  def question_help_text_id(translations_form)
+    "question-help-text-#{translations_form.locale}"
+  end
+
+  def summary_help_text_id(translations_form)
+    "summary-help-text-#{translations_form.locale}"
+  end
+
   def link_to_toggle_proposal_selection(proposal)
     if proposal.selected?
       button_text = t("admin.proposals.index.selected")
@@ -110,4 +118,5 @@ module ProposalsHelper
   def show_recommended_proposals?
     params[:selected].blank? && feature?("user.recommendations") && @recommended_proposals.present?
   end
+
 end
