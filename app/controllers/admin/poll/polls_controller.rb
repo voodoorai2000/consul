@@ -77,7 +77,9 @@ class Admin::Poll::PollsController < Admin::Poll::BaseController
 
     def poll_params
       attributes = [:name, :starts_at, :ends_at, :geozone_restricted, :budget_id,
-                    geozone_ids: [], image_attributes: image_attributes]
+                    :results_enabled, :stats_enabled
+                    geozone_ids: [],
+                    image_attributes: image_attributes]
 
       params.require(:poll).permit(*attributes, *report_attributes, translation_params(Poll))
     end
