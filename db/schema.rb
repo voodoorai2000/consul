@@ -220,6 +220,8 @@ ActiveRecord::Schema.define(version: 20190429125842) do
     t.datetime "updated_at",           null: false
     t.string   "title"
     t.text     "description"
+    t.datetime "hidden_at"
+    t.index ["hidden_at"], name: "index_budget_investment_translations_on_hidden_at", using: :btree
     t.index ["budget_investment_id"], name: "index_budget_investment_translations_on_budget_investment_id", using: :btree
     t.index ["locale"], name: "index_budget_investment_translations_on_locale", using: :btree
   end
