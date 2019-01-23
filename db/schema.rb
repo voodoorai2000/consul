@@ -426,6 +426,15 @@ ActiveRecord::Schema.define(version: 20190429125842) do
     t.index ["proposal_id"], name: "index_dashboard_executed_actions_on_proposal_id", using: :btree
   end
 
+  create_table "debate_translations", force: :cascade do |t|
+    t.string   "title"
+    t.text     "description"
+    t.datetime "hidden_at"
+    t.index ["debate_id"], name: "index_debate_translations_on_debate_id", using: :btree
+    t.index ["hidden_at"], name: "index_debate_translations_on_hidden_at", using: :btree
+    t.index ["locale"], name: "index_debate_translations_on_locale", using: :btree
+  end
+
   create_table "debates", force: :cascade do |t|
     t.string   "deprecated_title",             limit: 80
     t.text     "deprecated_description"
