@@ -1282,6 +1282,15 @@ ActiveRecord::Schema.define(version: 20190429125842) do
     t.index ["process_type", "process_id"], name: "index_reports_on_process_type_and_process_id", using: :btree
   end
 
+  create_table "remote_translations", force: :cascade do |t|
+    t.string   "locale"
+    t.integer  "remote_translatable_id"
+    t.string   "remote_translatable_type"
+    t.text     "error_message"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
   create_table "settings", force: :cascade do |t|
     t.string "key"
     t.string "value"
