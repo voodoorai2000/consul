@@ -89,6 +89,7 @@ Setting["feature.allow_images"] = true
 Setting["feature.allow_attached_documents"] = true
 Setting["feature.help_page"] = true
 Setting["feature.translation_interface"] = nil
+Setting['feature.remote_translations'] = nil
 
 # Proposal notifications
 Setting["proposal_notification_minimum_interval_in_days"] = 3
