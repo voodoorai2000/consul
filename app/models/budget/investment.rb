@@ -389,8 +389,8 @@ class Budget
       end
 
       def searchable_translations_definitions
-        { title       => 'A',
-          description => 'D' }
+        { title       => "A",
+          description => "D" }
       end
   end
 end
