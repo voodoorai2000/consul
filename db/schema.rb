@@ -680,9 +680,6 @@ ActiveRecord::Schema.define(version: 20190429125842) do
   end
 
   create_table "legislation_processes", force: :cascade do |t|
-    t.string   "title"
-    t.text     "description"
-    t.text     "additional_info"
     t.date     "start_date"
     t.date     "end_date"
     t.date     "debate_start_date"
@@ -694,7 +691,6 @@ ActiveRecord::Schema.define(version: 20190429125842) do
     t.datetime "hidden_at"
     t.datetime "created_at",                                 null: false
     t.datetime "updated_at",                                 null: false
-    t.text     "summary"
     t.boolean  "debate_phase_enabled",       default: false
     t.boolean  "allegations_phase_enabled",  default: false
     t.boolean  "draft_publication_enabled",  default: false
