@@ -103,8 +103,6 @@ ActiveRecord::Schema.define(version: 20190429125842) do
   end
 
   create_table "banners", force: :cascade do |t|
-    t.string   "title",            limit: 80
-    t.string   "description"
     t.string   "target_url"
     t.date     "post_started_at"
     t.date     "post_ended_at"
