@@ -1017,8 +1017,6 @@ ActiveRecord::Schema.define(version: 20190429125842) do
   end
 
   create_table "poll_question_answers", force: :cascade do |t|
-    t.string  "title"
-    t.text    "description"
     t.integer "question_id"
     t.integer "given_order", default: 1
     t.boolean "most_voted",  default: false
