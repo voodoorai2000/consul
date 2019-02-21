@@ -650,11 +650,8 @@ ActiveRecord::Schema.define(version: 20190429125842) do
 
   create_table "legislation_draft_versions", force: :cascade do |t|
     t.integer  "legislation_process_id"
-    t.string   "title"
-    t.text     "changelog"
     t.string   "status",                 default: "draft"
     t.boolean  "final_version",          default: false
-    t.text     "body"
     t.datetime "hidden_at"
     t.datetime "created_at",                               null: false
     t.datetime "updated_at",                               null: false
