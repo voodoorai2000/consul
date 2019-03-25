@@ -275,8 +275,6 @@ ActiveRecord::Schema.define(version: 20190429125842) do
     t.integer  "budget_id"
     t.integer  "next_phase_id"
     t.string   "kind",                         null: false
-    t.text     "summary"
-    t.text     "description"
     t.datetime "starts_at"
     t.datetime "ends_at"
     t.boolean  "enabled",       default: true
