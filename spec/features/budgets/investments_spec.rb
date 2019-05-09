@@ -26,7 +26,6 @@ describe "Budget Investments" do
     it_behaves_like "notifiable in-app", Budget::Investment
     it_behaves_like "relationable", Budget::Investment
 
-
     context "Translatable at front end" do
       before do
         Setting["feature.translation_interface"] = true
