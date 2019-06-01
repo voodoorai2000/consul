@@ -1,4 +1,5 @@
 require "rails_helper"
+include WelcomeHelper
 
 RSpec.describe "welcome#index" do
 
