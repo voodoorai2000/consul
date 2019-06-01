@@ -11,6 +11,7 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema.define(version: 20190429125842) do
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "unaccent"
@@ -95,8 +96,8 @@ ActiveRecord::Schema.define(version: 20190429125842) do
     t.string   "title"
     t.text     "description"
     t.datetime "hidden_at"
-    t.index ["hidden_at"], name: "index_banner_translations_on_hidden_at", using: :btree
     t.index ["banner_id"], name: "index_banner_translations_on_banner_id", using: :btree
+    t.index ["hidden_at"], name: "index_banner_translations_on_hidden_at", using: :btree
     t.index ["locale"], name: "index_banner_translations_on_locale", using: :btree
   end
 
@@ -105,8 +106,8 @@ ActiveRecord::Schema.define(version: 20190429125842) do
     t.date     "post_started_at"
     t.date     "post_ended_at"
     t.datetime "hidden_at"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
     t.text     "background_color"
     t.text     "font_color"
     t.index ["hidden_at"], name: "index_banners_on_hidden_at", using: :btree
@@ -157,7 +158,7 @@ ActiveRecord::Schema.define(version: 20190429125842) do
   create_table "budget_groups", force: :cascade do |t|
     t.integer "budget_id"
     t.string  "slug"
-    t.integer "max_votable_headings",            default: 1
+    t.integer "max_votable_headings", default: 1
     t.index ["budget_id"], name: "index_budget_groups_on_budget_id", using: :btree
   end
 
@@ -176,7 +177,7 @@ ActiveRecord::Schema.define(version: 20190429125842) do
     t.bigint  "price"
     t.integer "population"
     t.string  "slug"
-    t.boolean "allow_custom_content",            default: false
+    t.boolean "allow_custom_content", default: false
     t.text    "latitude"
     t.text    "longitude"
     t.index ["group_id"], name: "index_budget_headings_on_group_id", using: :btree
@@ -221,8 +222,8 @@ ActiveRecord::Schema.define(version: 20190429125842) do
     t.string   "title"
     t.text     "description"
     t.datetime "hidden_at"
-    t.index ["hidden_at"], name: "index_budget_investment_translations_on_hidden_at", using: :btree
     t.index ["budget_investment_id"], name: "index_budget_investment_translations_on_budget_investment_id", using: :btree
+    t.index ["hidden_at"], name: "index_budget_investment_translations_on_hidden_at", using: :btree
     t.index ["locale"], name: "index_budget_investment_translations_on_locale", using: :btree
   end
 
@@ -373,8 +374,8 @@ ActiveRecord::Schema.define(version: 20190429125842) do
     t.datetime "updated_at", null: false
     t.text     "body"
     t.datetime "hidden_at"
-    t.index ["hidden_at"], name: "index_comment_translations_on_hidden_at", using: :btree
     t.index ["comment_id"], name: "index_comment_translations_on_comment_id", using: :btree
+    t.index ["hidden_at"], name: "index_comment_translations_on_hidden_at", using: :btree
     t.index ["locale"], name: "index_comment_translations_on_locale", using: :btree
   end
 
@@ -452,6 +453,10 @@ ActiveRecord::Schema.define(version: 20190429125842) do
   end
 
   create_table "debate_translations", force: :cascade do |t|
+    t.integer  "debate_id",   null: false
+    t.string   "locale",      null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.string   "title"
     t.text     "description"
     t.datetime "hidden_at"
@@ -683,8 +688,6 @@ ActiveRecord::Schema.define(version: 20190429125842) do
     t.datetime "hidden_at"
     t.datetime "created_at",                               null: false
     t.datetime "updated_at",                               null: false
-    t.text     "body_html"
-    t.text     "toc_html"
     t.index ["hidden_at"], name: "index_legislation_draft_versions_on_hidden_at", using: :btree
     t.index ["legislation_process_id"], name: "index_legislation_draft_versions_on_legislation_process_id", using: :btree
     t.index ["status"], name: "index_legislation_draft_versions_on_status", using: :btree
@@ -893,8 +896,8 @@ ActiveRecord::Schema.define(version: 20190429125842) do
     t.integer  "milestoneable_id"
     t.datetime "publication_date"
     t.integer  "status_id"
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
     t.index ["status_id"], name: "index_milestones_on_status_id", using: :btree
   end
 
@@ -1201,28 +1204,26 @@ ActiveRecord::Schema.define(version: 20190429125842) do
     t.text     "summary"
     t.text     "retired_explanation"
     t.datetime "hidden_at"
+    t.index ["hidden_at"], name: "index_proposal_translations_on_hidden_at", using: :btree
+    t.index ["locale"], name: "index_proposal_translations_on_locale", using: :btree
+    t.index ["proposal_id"], name: "index_proposal_translations_on_proposal_id", using: :btree
   end
-
-  add_index "proposal_translations", ["hidden_at"], name: "index_proposal_translations_on_hidden_at", using: :btree
-  add_index "proposal_translations", ["locale"], name: "index_proposal_translations_on_locale", using: :btree
-  add_index "proposal_translations", ["proposal_id"], name: "index_proposal_translations_on_proposal_id", using: :btree
 
   create_table "proposals", force: :cascade do |t|
     t.string   "deprecated_title",               limit: 80
     t.text     "deprecated_description"
-    t.string   "deprecated_question"
     t.integer  "author_id"
     t.datetime "hidden_at"
-    t.integer  "flags_count",                    default: 0
+    t.integer  "flags_count",                               default: 0
     t.datetime "ignored_flag_at"
-    t.integer  "cached_votes_up",                default: 0
-    t.integer  "comments_count",                 default: 0
+    t.integer  "cached_votes_up",                           default: 0
+    t.integer  "comments_count",                            default: 0
     t.datetime "confirmed_hide_at"
-    t.bigint   "hot_score",                      default: 0
-    t.integer  "confidence_score",               default: 0
-    t.datetime "created_at",                                 null: false
-    t.datetime "updated_at",                                 null: false
-    t.string   "responsible_name",    limit: 60
+    t.bigint   "hot_score",                                 default: 0
+    t.integer  "confidence_score",                          default: 0
+    t.datetime "created_at",                                                null: false
+    t.datetime "updated_at",                                                null: false
+    t.string   "responsible_name",               limit: 60
     t.text     "deprecated_summary"
     t.string   "video_url"
     t.tsvector "tsv"
@@ -1232,7 +1233,7 @@ ActiveRecord::Schema.define(version: 20190429125842) do
     t.text     "deprecated_retired_explanation"
     t.integer  "community_id"
     t.datetime "published_at"
-    t.boolean  "selected",                       default: false
+    t.boolean  "selected",                                  default: false
     t.index ["author_id", "hidden_at"], name: "index_proposals_on_author_id_and_hidden_at", using: :btree
     t.index ["author_id"], name: "index_proposals_on_author_id", using: :btree
     t.index ["cached_votes_up"], name: "index_proposals_on_cached_votes_up", using: :btree
@@ -1271,6 +1272,15 @@ ActiveRecord::Schema.define(version: 20190429125842) do
     t.index ["related_content_id"], name: "opposite_related_content", using: :btree
   end
 
+  create_table "remote_translations", force: :cascade do |t|
+    t.string   "locale"
+    t.integer  "remote_translatable_id"
+    t.string   "remote_translatable_type"
+    t.text     "error_message"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
   create_table "reports", force: :cascade do |t|
     t.boolean  "stats"
     t.boolean  "results"
@@ -1280,15 +1290,6 @@ ActiveRecord::Schema.define(version: 20190429125842) do
     t.datetime "updated_at",     null: false
     t.boolean  "advanced_stats"
     t.index ["process_type", "process_id"], name: "index_reports_on_process_type_and_process_id", using: :btree
-  end
-
-  create_table "remote_translations", force: :cascade do |t|
-    t.string   "locale"
-    t.integer  "remote_translatable_id"
-    t.string   "remote_translatable_type"
-    t.text     "error_message"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
   end
 
   create_table "settings", force: :cascade do |t|
