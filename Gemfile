@@ -54,8 +54,6 @@ gem "turnout", "~> 2.4.0"
 gem "uglifier", "~> 4.1.2"
 gem "unicorn", "~> 5.4.1"
 gem "whenever", "~> 0.10.0", require: false
-gem "globalize", "~> 5.2.0"
-gem "globalize-accessors", "~> 0.2.1"
 gem "recipient_interceptor", "~> 0.2.0"
 gem "translator-text"
 gem "wkhtmltopdf-binary", "~> 0.12.4"
