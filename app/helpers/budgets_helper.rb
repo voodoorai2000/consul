@@ -97,12 +97,19 @@ module BudgetsHelper
   def link_to_create_budget_poll(budget)
     balloting_phase = budget.phases.where(kind: "balloting").first
 
+    poll_name = {
+      translations_attributes:
+        { "0":
+          { locale: I18n.locale,
+            name: budget.name }
+          }
+        }
+
     link_to t("admin.budgets.index.admin_ballots"),
             admin_polls_path(poll: {
-                              name:      budget.name,
                               budget_id: budget.id,
                               starts_at: balloting_phase.starts_at,
-                              ends_at:   balloting_phase.ends_at }),
+                              ends_at:   balloting_phase.ends_at }.merge(poll_name)),
             method: :post
   end
 end
