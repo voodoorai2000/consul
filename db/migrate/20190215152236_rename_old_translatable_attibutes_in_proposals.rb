@@ -6,7 +6,6 @@ class RenameOldTranslatableAttibutesInProposals < ActiveRecord::Migration
 
     rename_column :proposals, :title, :deprecated_title
     rename_column :proposals, :description, :deprecated_description
-    rename_column :proposals, :question, :deprecated_question
     rename_column :proposals, :summary, :deprecated_summary
     rename_column :proposals, :retired_explanation, :deprecated_retired_explanation
   end

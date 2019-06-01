@@ -31,7 +31,6 @@ class Proposal < ApplicationRecord
 
   translates :title, touch: true
   translates :description, touch: true
-  translates :question, touch: true
   translates :summary, touch: true
   translates :retired_explanation, touch: true
   include Globalizable
@@ -47,7 +46,6 @@ class Proposal < ApplicationRecord
 
   validates_translation :title, presence: true, length: { in: 4..Proposal.title_max_length }
   validates_translation :description, length: { maximum: Proposal.description_max_length }
-  validates_translation :question, presence: true, length: { in: 10..Proposal.question_max_length }
   validates_translation :summary, presence: true
   validates_translation :retired_explanation, presence: true, unless: -> { retired_at.blank? }
 
@@ -126,7 +124,6 @@ class Proposal < ApplicationRecord
 
   def searchable_translations_definitions
     { title       => "A",
-      question    => "B",
       summary     => "C",
       description => "D" }
   end

@@ -488,11 +488,9 @@ describe Proposal do
     context "attributes" do
 
       let(:attributes) { { title: "save the world",
-                           question: "to be or not to be",
                            summary: "basically",
                            description: "in order to save the world one must think about...",
                            title_es: "para salvar el mundo uno debe pensar en...",
-                           question_es: "ser o no ser",
                            summary_es: "basicamente",
                            description_es: "uno debe pensar" } }
 
@@ -529,18 +527,6 @@ describe Proposal do
       it "searches by description across all languages translations" do
         proposal = create(:proposal, attributes)
         results = described_class.search("uno debe pensar")
-        expect(results).to eq([proposal])
-      end
-
-      it "searches by question" do
-        proposal = create(:proposal, attributes)
-        results = described_class.search("to be or not to be")
-        expect(results).to eq([proposal])
-      end
-
-      it "searches by question across all languages translations" do
-        proposal = create(:proposal, attributes)
-        results = described_class.search("ser o no ser")
         expect(results).to eq([proposal])
       end
 

@@ -195,7 +195,6 @@ en:
       proposal/translation:
         title: "Proposal title"
         description: "Proposal text"
-        question: "Proposal question"
         summary: "Proposal summary"
         retired_explanation: "Explanation"
       user:

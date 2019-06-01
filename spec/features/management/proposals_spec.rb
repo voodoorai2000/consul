@@ -22,7 +22,6 @@ describe "Proposals" do
       end
 
       fill_in "Proposal title", with: "Help refugees"
-      fill_in "Proposal question", with: "¿Would you like to give assistance to war refugees?"
       fill_in "Proposal summary", with: "In summary, what we want is..."
       fill_in "Proposal text", with: "This is very important because..."
       fill_in "proposal_video_url", with: "https://www.youtube.com/watch?v=yRYFKcMa_Ek"

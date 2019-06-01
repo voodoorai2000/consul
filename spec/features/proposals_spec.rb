@@ -18,12 +18,12 @@ describe "Proposals" do
     it_behaves_like "new_translatable",
                     "proposal",
                     "new_proposal_path",
-                    %w[title question summary],
+                    %w[title summary],
                     { "description" => :ckeditor }
     it_behaves_like "edit_translatable",
                     "proposal",
                     "edit_proposal_path",
-                    %w[title question summary],
+                    %w[title summary],
                     { "description" => :ckeditor }
     it_behaves_like "remotely_translatable",
                     :proposal,
@@ -313,7 +313,6 @@ describe "Proposals" do
     visit new_proposal_path
 
     fill_in "Proposal title", with: "I am a bot"
-    fill_in "Proposal question", with: "This is a question"
     fill_in "Proposal summary", with: "This is the summary"
     fill_in "Proposal text", with: "This is the description"
     fill_in "proposal_responsible_name", with: "Some other robot"

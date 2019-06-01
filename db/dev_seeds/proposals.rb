@@ -25,14 +25,12 @@ section "Creating Proposals" do
   tags = Faker::Lorem.words(25)
   30.times do
     title = Faker::Lorem.sentence(3).truncate(60)
-    question = Faker::Lorem.sentence(3) + "?"
     summary = Faker::Lorem.sentence(3)
     description = "<p>#{Faker::Lorem.paragraphs.join('</p><p>')}</p>"
     author = User.all.sample
 
     proposal = Proposal.create!(author: author,
                                 title: title,
-                                question: question,
                                 summary: summary,
                                 description: description,
                                 responsible_name: Faker::Name.name,
@@ -45,7 +43,6 @@ section "Creating Proposals" do
     random_locales.map do |locale|
       Globalize.with_locale(locale) do
         proposal.title = "Title for locale #{locale}"
-        proposal.question = "Question for locale #{locale}?"
         proposal.summary = "Summary for locale #{locale}"
         proposal.description = "<p>Description for locale #{locale}</p>"
         proposal.save!
@@ -75,7 +72,6 @@ section "Creating Archived Proposals" do
     random_locales.map do |locale|
       Globalize.with_locale(locale) do
         proposal.title = "Archived proposal title for locale #{locale}"
-        proposal.question = "Archived proposal question for locale #{locale}?"
         proposal.summary = "Archived proposal title summary for locale #{locale}"
         proposal.description = "<p>Archived proposal description for locale #{locale}</p>"
         proposal.save!
@@ -105,7 +101,6 @@ section "Creating Successful Proposals" do
     random_locales.map do |locale|
       Globalize.with_locale(locale) do
         proposal.title = "Successful proposal title for locale #{locale}"
-        proposal.question = "Successful proposal question for locale #{locale}?"
         proposal.summary = "Successful proposal title summary for locale #{locale}"
         proposal.description = "<p>Successful proposal description for locale #{locale}</p>"
         proposal.save!
@@ -132,7 +127,6 @@ section "Creating Successful Proposals" do
     random_locales.map do |locale|
       Globalize.with_locale(locale) do
         proposal.title = "Tagged proposal title for locale #{locale}"
-        proposal.question = "Tagged proposal question for locale #{locale}?"
         proposal.summary = "Tagged proposal title summary for locale #{locale}"
         proposal.description = "<p>Tagged proposal description for locale #{locale}</p>"
         proposal.save!
