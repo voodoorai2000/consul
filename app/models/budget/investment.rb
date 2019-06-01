@@ -159,10 +159,10 @@ class Budget
       allowed_sort_option = SORTING_OPTIONS[sorting_key]
       direction = params[:direction] == "desc" ? "desc" : "asc"
 
-      if allowed_sort_option.present?
-        order("#{allowed_sort_option} #{direction}")
-      elsif sorting_key == :title
+      if sorting_key == :title
         direction == "asc" ? sort_by_title : sort_by_title.reverse
+      elsif allowed_sort_option.present?
+        order("#{allowed_sort_option} #{direction}")
       else
         order(cached_votes_up: :desc).order(id: :desc)
       end
