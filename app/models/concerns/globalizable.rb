@@ -7,9 +7,9 @@ module Globalizable
       translations.reject(&:_destroy).map(&:locale).map(&:to_sym)
     end
 
-    def description
-      self.read_attribute(:description).try :html_safe
-    end
+    # def description
+    #   self.read_attribute(:description).try :html_safe
+    # end
 
     if self.paranoid? && translation_class.attribute_names.include?("hidden_at")
       translation_class.send :acts_as_paranoid, column: :hidden_at

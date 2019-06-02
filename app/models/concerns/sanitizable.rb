@@ -5,11 +5,11 @@ module Sanitizable
     before_validation :sanitize_description
     before_validation :sanitize_tag_list
 
-    unless included_modules.include? Globalizable
-      def description
-        super.try :html_safe
-      end
-    end
+    # unless included_modules.include? Globalizable
+    #   def description
+    #     super.try :html_safe
+    #   end
+    # end
   end
 
   protected
