@@ -37,7 +37,7 @@ class Proposal < ApplicationRecord
                max_file_size: 3.megabytes,
                accepted_content_types: [ "application/pdf" ]
 
-  translation_class_delegate :retired_at
+  #translation_class_delegate :retired_at
 
   belongs_to :author, -> { with_hidden }, class_name: "User", foreign_key: "author_id"
   belongs_to :geozone

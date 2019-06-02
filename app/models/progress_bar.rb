@@ -11,7 +11,7 @@ class ProgressBar < ApplicationRecord
 
   translates :title, touch: true
 
-  translation_class_delegate :primary?
+  #translation_class_delegate :primary?
 
   validates :progressable, presence: true
   validates :kind, presence: true,

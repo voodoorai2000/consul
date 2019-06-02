@@ -5,7 +5,7 @@ class Budget
     extend Mobility
 
     translates :name, touch: true
-    translation_class_delegate :budget
+    #translation_class_delegate :budget
 
     # class Translation
     #   validate :name_uniqueness_by_budget
