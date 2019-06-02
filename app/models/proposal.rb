@@ -15,17 +15,13 @@ class Proposal < ApplicationRecord
   include Mappable
   include Notifiable
   include Documentable
-  documentable max_documents_allowed: 3,
-               max_file_size: 3.megabytes,
-               accepted_content_types: [ "application/pdf" ]
   include EmbedVideosHelper
   include Relationable
   include Milestoneable
   include Randomizable
-
-  acts_as_votable
-  acts_as_paranoid column: :hidden_at
   include ActsAsParanoidAliases
+  include Globalizable
+  extend Mobility
 
   RETIRE_OPTIONS = %w[duplicated started unfeasible done other]
 
@@ -33,8 +29,15 @@ class Proposal < ApplicationRecord
   translates :description, touch: true
   translates :summary, touch: true
   translates :retired_explanation, touch: true
-  include Globalizable
-  translation_class_delegate :retired_at
+
+  acts_as_votable
+  acts_as_paranoid column: :hidden_at
+
+  documentable max_documents_allowed: 3,
+               max_file_size: 3.megabytes,
+               accepted_content_types: [ "application/pdf" ]
+
+  #translation_class_delegate :retired_at
 
   belongs_to :author, -> { with_hidden }, class_name: "User", foreign_key: "author_id"
   belongs_to :geozone
@@ -44,10 +47,10 @@ class Proposal < ApplicationRecord
   has_many :dashboard_actions, through: :dashboard_executed_actions, class_name: "Dashboard::Action"
   has_many :polls, as: :related
 
-  validates_translation :title, presence: true, length: { in: 4..Proposal.title_max_length }
-  validates_translation :description, length: { maximum: Proposal.description_max_length }
-  validates_translation :summary, presence: true
-  validates_translation :retired_explanation, presence: true, unless: -> { retired_at.blank? }
+  # validates_translation :title, presence: true, length: { in: 4..Proposal.title_max_length }
+  # validates_translation :description, length: { maximum: Proposal.description_max_length }
+  # validates_translation :summary, presence: true
+  # validates_translation :retired_explanation, presence: true, unless: -> { retired_at.blank? }
 
   validates :author, presence: true
   validates :responsible_name, presence: true, unless: :skip_user_verification?

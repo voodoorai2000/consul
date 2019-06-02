@@ -1,21 +1,22 @@
 class Legislation::DraftVersion < ApplicationRecord
   VALID_STATUSES = %w(draft published)
-
-  acts_as_paranoid column: :hidden_at
   include ActsAsParanoidAliases
+  include Globalizable
+  extend Mobility
 
   translates :title,     touch: true
   translates :changelog, touch: true
   translates :body,      touch: true
   translates :body_html, touch: true
   translates :toc_html,  touch: true
-  include Globalizable
+
+  acts_as_paranoid column: :hidden_at
 
   belongs_to :process, class_name: "Legislation::Process", foreign_key: "legislation_process_id"
   has_many :annotations, class_name: "Legislation::Annotation", foreign_key: "legislation_draft_version_id", dependent: :destroy
 
-  validates_translation :title, presence: true
-  validates_translation :body, presence: true
+  #validates_translation :title, presence: true
+  #validates_translation :body, presence: true
   validates :status, presence: true, inclusion: { in: VALID_STATUSES }
 
   scope :published, -> { where(status: "published").order("id DESC") }

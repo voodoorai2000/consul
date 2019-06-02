@@ -1,12 +1,13 @@
 class Poll::Question < ApplicationRecord
   include Measurable
   include Searchable
-
-  acts_as_paranoid column: :hidden_at
   include ActsAsParanoidAliases
+  include Globalizable
+  extend Mobility
 
   translates :title, touch: true
-  include Globalizable
+
+  acts_as_paranoid column: :hidden_at
 
   belongs_to :poll
   belongs_to :author, -> { with_hidden }, class_name: "User", foreign_key: "author_id"
@@ -17,7 +18,7 @@ class Poll::Question < ApplicationRecord
   has_many :partial_results
   belongs_to :proposal
 
-  validates_translation :title, presence: true, length: { minimum: 4 }
+  #validates_translation :title, presence: true, length: { minimum: 4 }
   validates :author, presence: true
   validates :poll_id, presence: true, if: Proc.new { |question| question.poll.nil? }
 
@@ -47,7 +48,7 @@ class Poll::Question < ApplicationRecord
       self.author = proposal.author
       self.author_visible_name = proposal.author.name
       self.proposal_id = proposal.id
-      send(:"#{localized_attr_name_for(:title, Globalize.locale)}=", proposal.title)
+      send(:"#{localized_attr_name_for(:title, Mobility.locale)}=", proposal.title)
     end
   end
 

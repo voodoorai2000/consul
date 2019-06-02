@@ -1,10 +1,11 @@
 class Poll::Question::Answer < ApplicationRecord
   include Galleryable
   include Documentable
+  include Globalizable
+  extend Mobility
 
   translates :title,       touch: true
   translates :description, touch: true
-  include Globalizable
 
   documentable max_documents_allowed: 3,
                max_file_size: 3.megabytes,
@@ -14,7 +15,7 @@ class Poll::Question::Answer < ApplicationRecord
   belongs_to :question, class_name: "Poll::Question", foreign_key: "question_id"
   has_many :videos, class_name: "Poll::Question::Answer::Video"
 
-  validates_translation :title, presence: true
+  #validates_translation :title, presence: true
   validates :given_order, presence: true, uniqueness: { scope: :question_id }
 
   def description

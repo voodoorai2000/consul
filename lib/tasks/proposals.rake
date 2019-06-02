@@ -11,7 +11,7 @@ namespace :proposals do
       print "Move external_url to description for #{model}s"
       model.find_each do |resource|
         if resource.external_url.present?
-          Globalize.with_locale(I18n.default_locale) do
+          Mobility.with_locale(I18n.default_locale) do
             new_description = "#{resource.description} <p>#{text_with_links(resource.external_url)}</p>"
             resource.description = new_description
             resource.external_url = ""

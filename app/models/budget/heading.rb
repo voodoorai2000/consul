@@ -1,12 +1,13 @@
 class Budget
   class Heading < ApplicationRecord
+    include Sluggable
+    include Globalizable
+    extend Mobility
+
     OSM_DISTRICT_LEVEL_ZOOM = 12.freeze
 
-    include Sluggable
-
     translates :name, touch: true
-    include Globalizable
-    translation_class_delegate :budget
+    #translation_class_delegate :budget
 
     class Translation
       validate :name_uniqueness_by_budget
@@ -26,7 +27,7 @@ class Budget
     has_many :investments
     has_many :content_blocks
 
-    validates_translation :name, presence: true
+    #validates_translation :name, presence: true
     validates :group_id, presence: true
     validates :price, presence: true
     validates :slug, presence: true, format: /\A[a-z0-9\-_]+\z/
@@ -61,19 +62,19 @@ class Budget
       slug.nil? || budget.drafting?
     end
 
-    class Translation < Globalize::ActiveRecord::Translation
-      delegate :budget, to: :globalized_model
-
-      validate :name_uniqueness_by_budget
-
-      def name_uniqueness_by_budget
-        if budget.headings
-                 .joins(:translations)
-                 .where(name: name)
-                 .where.not("budget_heading_translations.budget_heading_id": budget_heading_id).any?
-          errors.add(:name, I18n.t("errors.messages.taken"))
-        end
-      end
-    end
+    #class Translation < Globalize::ActiveRecord::Translation
+    #  delegate :budget, to: :globalized_model
+#
+    #  validate :name_uniqueness_by_budget
+#
+    #  def name_uniqueness_by_budget
+    #    if budget.headings
+    #             .joins(:translations)
+    #             .where(name: name)
+    #             .where.not("budget_heading_translations.budget_heading_id": budget_heading_id).any?
+    #      errors.add(:name, I18n.t("errors.messages.taken"))
+    #    end
+    #  end
+    #end
   end
 end

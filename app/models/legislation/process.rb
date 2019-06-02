@@ -4,12 +4,8 @@ class Legislation::Process < ApplicationRecord
   include Milestoneable
   include Imageable
   include Documentable
-  documentable max_documents_allowed: 3,
-               max_file_size: 3.megabytes,
-               accepted_content_types: [ "application/pdf" ]
-
-  acts_as_paranoid column: :hidden_at
-  acts_as_taggable_on :customs
+  include Globalizable
+  extend Mobility
 
   translates :title,              touch: true
   translates :summary,            touch: true
@@ -17,7 +13,13 @@ class Legislation::Process < ApplicationRecord
   translates :additional_info,    touch: true
   translates :milestones_summary, touch: true
   translates :homepage,           touch: true
-  include Globalizable
+
+  documentable max_documents_allowed: 3,
+               max_file_size: 3.megabytes,
+               accepted_content_types: [ "application/pdf" ]
+
+  acts_as_paranoid column: :hidden_at
+  acts_as_taggable_on :customs
 
   PHASES_AND_PUBLICATIONS = %i[homepage_phase draft_phase debate_phase allegations_phase
                                proposals_phase draft_publication result_publication].freeze
@@ -35,7 +37,7 @@ class Legislation::Process < ApplicationRecord
   has_many :proposals, -> { order(:id) }, class_name: "Legislation::Proposal",
                                           foreign_key: "legislation_process_id", dependent: :destroy
 
-  validates_translation :title, presence: true
+  #validates_translation :title, presence: true
   validates :start_date, presence: true
   validates :end_date, presence: true
   validates :debate_start_date, presence: true, if: :debate_end_date?

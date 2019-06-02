@@ -1,12 +1,12 @@
 class Budget < ApplicationRecord
-
   include Measurable
   include Sluggable
   include StatsVersionable
   include Reportable
+  include Globalizable
+  extend Mobility
 
   translates :name, touch: true
-  include Globalizable
 
   class Translation
     validate :name_uniqueness_by_budget
@@ -22,7 +22,7 @@ class Budget < ApplicationRecord
 
   CURRENCY_SYMBOLS = %w(€ $ £ ¥).freeze
 
-  validates_translation :name, presence: true
+  #validates_translation :name, presence: true
   validates :phase, inclusion: { in: Budget::Phase::PHASE_KINDS }
   validates :currency_symbol, presence: true
   validates :slug, presence: true, format: /\A[a-z0-9\-_]+\z/
@@ -219,15 +219,15 @@ class Budget < ApplicationRecord
     slug.nil? || drafting?
   end
 
-  class Translation < Globalize::ActiveRecord::Translation
-    validate :name_uniqueness_by_budget
+  # class Translation < Globalize::ActiveRecord::Translation
+  #   validate :name_uniqueness_by_budget
 
-    def name_uniqueness_by_budget
-      if Budget.joins(:translations)
-               .where(name: name)
-               .where.not("budget_translations.budget_id": budget_id).any?
-        errors.add(:name, I18n.t("errors.messages.taken"))
-      end
-    end
-  end
+  #   def name_uniqueness_by_budget
+  #     if Budget.joins(:translations)
+  #              .where(name: name)
+  #              .where.not("budget_translations.budget_id": budget_id).any?
+  #       errors.add(:name, I18n.t("errors.messages.taken"))
+  #     end
+  #   end
+  # end
 end

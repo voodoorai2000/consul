@@ -13,21 +13,22 @@ class Debate < ApplicationRecord
   include Relationable
   include Notifiable
   include Randomizable
+  include ActsAsParanoidAliases
+  include Globalizable
+  extend Mobility
 
   acts_as_votable
   acts_as_paranoid column: :hidden_at
-  include ActsAsParanoidAliases
 
   translates :title, touch: true
   translates :description, touch: true
-  include Globalizable
 
   belongs_to :author, -> { with_hidden }, class_name: "User", foreign_key: "author_id"
   belongs_to :geozone
   has_many :comments, as: :commentable
 
-  validates_translation :title, presence: true, length: { in: 4..Debate.title_max_length }
-  validates_translation :description, presence: true, length: { in: 10..Debate.description_max_length }
+  #validates_translation :title, presence: true, length: { in: 4..Debate.title_max_length }
+  #validates_translation :description, presence: true, length: { in: 10..Debate.description_max_length }
   validates :author, presence: true
 
   validates :terms_of_service, acceptance: { allow_nil: false }, on: :create

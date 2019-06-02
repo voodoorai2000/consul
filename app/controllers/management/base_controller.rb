@@ -1,5 +1,4 @@
 class Management::BaseController < ActionController::Base
-  include GlobalizeFallbacks
   layout "management"
 
   before_action :verify_manager
@@ -44,7 +43,7 @@ class Management::BaseController < ActionController::Base
       session[:locale] ||= I18n.default_locale
 
       I18n.locale = session[:locale]
-      Globalize.locale = I18n.locale
+      Mobility.locale = I18n.locale
     end
 
     def current_budget

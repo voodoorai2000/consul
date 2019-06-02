@@ -34,7 +34,7 @@ RSpec.describe Poll::Question, type: :model do
     context "locale with non-underscored name" do
       before do
         I18n.locale = :"pt-BR"
-        Globalize.locale = I18n.locale
+        Mobility.locale = I18n.locale
       end
 
       it "correctly creates a translation" do

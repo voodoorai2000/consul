@@ -3,6 +3,8 @@ class Comment < ApplicationRecord
   include HasPublicAuthor
   include Graphqlable
   include Notifiable
+  include Globalizable
+  extend Mobility
 
   COMMENTABLE_TYPES = %w(Debate Proposal Budget::Investment Poll Topic Legislation::Question
                         Legislation::Annotation Legislation::Proposal).freeze
@@ -15,9 +17,8 @@ class Comment < ApplicationRecord
   attr_accessor :as_moderator, :as_administrator
 
   translates :body, touch: true
-  include Globalizable
 
-  validates_translation :body, presence: true
+  #validates_translation :body, presence: true
   validates :user, presence: true
 
   validates :commentable_type, inclusion: { in: COMMENTABLE_TYPES }

@@ -1,10 +1,11 @@
 class Budget
   class Group < ApplicationRecord
     include Sluggable
+    include Globalizable
+    extend Mobility
 
     translates :name, touch: true
-    include Globalizable
-    translation_class_delegate :budget
+    #translation_class_delegate :budget
 
     class Translation
       validate :name_uniqueness_by_budget
@@ -22,7 +23,7 @@ class Budget
 
     has_many :headings, dependent: :destroy
 
-    validates_translation :name, presence: true
+    #validates_translation :name, presence: true
     validates :budget_id, presence: true
     validates :slug, presence: true, format: /\A[a-z0-9\-_]+\z/
 
@@ -38,18 +39,18 @@ class Budget
       slug.nil? || budget.drafting?
     end
 
-    class Translation < Globalize::ActiveRecord::Translation
-      delegate :budget, to: :globalized_model
-
-      validate :name_uniqueness_by_budget
-
-      def name_uniqueness_by_budget
-        if budget.groups.joins(:translations)
-                        .where(name: name)
-                        .where.not("budget_group_translations.budget_group_id": budget_group_id).any?
-          errors.add(:name, I18n.t("errors.messages.taken"))
-        end
-      end
-    end
+    #class Translation < Globalize::ActiveRecord::Translation
+    #  delegate :budget, to: :globalized_model
+#
+    #  validate :name_uniqueness_by_budget
+#
+    #  def name_uniqueness_by_budget
+    #    if budget.groups.joins(:translations)
+    #                    .where(name: name)
+    #                    .where.not("budget_group_translations.budget_group_id": budget_group_id).any?
+    #      errors.add(:name, I18n.t("errors.messages.taken"))
+    #    end
+    #  end
+    #end
   end
 end
