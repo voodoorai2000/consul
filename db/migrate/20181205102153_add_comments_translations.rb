@@ -1,14 +1,19 @@
 class AddCommentsTranslations < ActiveRecord::Migration
   def self.up
-    Comment.create_translation_table!(
-      {
-        body:               :text
-       },
-      { migrate_data: true }
-    )
+    create_table :comment_translations, force: :cascade do |t|
+      t.text     :body
+
+      t.integer  :comment_id, null: false
+      t.string   :locale,     null: false
+
+      t.timestamps null: false
+
+      t.index [:comment_id], name: "index_comment_translations_on_comment_id", using: :btree
+      t.index [:locale], name: "index_comment_translations_on_locale", using: :btree
+    end
   end
 
   def self.down
-    Comment.drop_translation_table!
+    drop_table :comment_translations
   end
 end
