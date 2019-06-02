@@ -10,7 +10,7 @@ class Milestone < ApplicationRecord
 
   translates :title, :description, touch: true
 
-  #translation_class_delegate :status_id
+  translation_class_delegate :status_id
 
   belongs_to :milestoneable, polymorphic: true
   belongs_to :status
