@@ -45,9 +45,6 @@ RSpec.configure do |config|
     DatabaseCleaner.strategy = :transaction
     I18n.locale = :en
     Mobility.locale = I18n.locale
-    unless %i[controller feature request].include? example.metadata[:type]
-      Globalize.set_fallbacks_to_all_available_locales
-    end
     load Rails.root.join("db", "seeds.rb").to_s
     Setting["feature.user.skip_verification"] = nil
   end
