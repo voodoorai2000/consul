@@ -9,18 +9,18 @@ class Budget
     translates :name, touch: true
     translation_class_delegate :budget
 
-    class Translation
-      validate :name_uniqueness_by_budget
+    # class Translation
+    #   validate :name_uniqueness_by_budget
 
-      def name_uniqueness_by_budget
-        if budget.headings
-                 .joins(:translations)
-                 .where(name: name)
-                 .where.not("budget_heading_translations.budget_heading_id": budget_heading_id).any?
-          errors.add(:name, I18n.t("errors.messages.taken"))
-        end
-      end
-    end
+    #   def name_uniqueness_by_budget
+    #     if budget.headings
+    #              .joins(:translations)
+    #              .where(name: name)
+    #              .where.not("budget_heading_translations.budget_heading_id": budget_heading_id).any?
+    #       errors.add(:name, I18n.t("errors.messages.taken"))
+    #     end
+    #   end
+    # end
 
     belongs_to :group
 
@@ -62,19 +62,19 @@ class Budget
       slug.nil? || budget.drafting?
     end
 
-    class Translation < Globalize::ActiveRecord::Translation
-      delegate :budget, to: :translated_model
+    # class Translation < Globalize::ActiveRecord::Translation
+    #   delegate :budget, to: :translated_model
 
-      validate :name_uniqueness_by_budget
+    #   validate :name_uniqueness_by_budget
 
-      def name_uniqueness_by_budget
-        if budget.headings
-                 .joins(:translations)
-                 .where(name: name)
-                 .where.not("budget_heading_translations.budget_heading_id": budget_heading_id).any?
-          errors.add(:name, I18n.t("errors.messages.taken"))
-        end
-      end
-    end
+    #   def name_uniqueness_by_budget
+    #     if budget.headings
+    #              .joins(:translations)
+    #              .where(name: name)
+    #              .where.not("budget_heading_translations.budget_heading_id": budget_heading_id).any?
+    #       errors.add(:name, I18n.t("errors.messages.taken"))
+    #     end
+    #   end
+    # end
   end
 end

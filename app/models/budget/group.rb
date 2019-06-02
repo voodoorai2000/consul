@@ -7,17 +7,17 @@ class Budget
     translates :name, touch: true
     translation_class_delegate :budget
 
-    class Translation
-      validate :name_uniqueness_by_budget
+    # class Translation
+    #   validate :name_uniqueness_by_budget
 
-      def name_uniqueness_by_budget
-        if budget.groups.joins(:translations)
-                        .where(name: name)
-                        .where.not("budget_group_translations.budget_group_id": budget_group_id).any?
-          errors.add(:name, I18n.t("errors.messages.taken"))
-        end
-      end
-    end
+    #   def name_uniqueness_by_budget
+    #     if budget.groups.joins(:translations)
+    #                     .where(name: name)
+    #                     .where.not("budget_group_translations.budget_group_id": budget_group_id).any?
+    #       errors.add(:name, I18n.t("errors.messages.taken"))
+    #     end
+    #   end
+    # end
 
     belongs_to :budget
 
@@ -39,18 +39,18 @@ class Budget
       slug.nil? || budget.drafting?
     end
 
-    class Translation < Globalize::ActiveRecord::Translation
-      delegate :budget, to: :translated_model
+    # class Translation < Globalize::ActiveRecord::Translation
+    #   delegate :budget, to: :translated_model
 
-      validate :name_uniqueness_by_budget
+    #   validate :name_uniqueness_by_budget
 
-      def name_uniqueness_by_budget
-        if budget.groups.joins(:translations)
-                        .where(name: name)
-                        .where.not("budget_group_translations.budget_group_id": budget_group_id).any?
-          errors.add(:name, I18n.t("errors.messages.taken"))
-        end
-      end
-    end
+    #   def name_uniqueness_by_budget
+    #     if budget.groups.joins(:translations)
+    #                     .where(name: name)
+    #                     .where.not("budget_group_translations.budget_group_id": budget_group_id).any?
+    #       errors.add(:name, I18n.t("errors.messages.taken"))
+    #     end
+    #   end
+    # end
   end
 end
