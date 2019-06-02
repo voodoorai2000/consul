@@ -2,7 +2,6 @@ module Globalizable
   extend ActiveSupport::Concern
 
   included do
-    #accepts_nested_attributes_for :translations, allow_destroy: true
 
     def locales_not_marked_for_destruction
       translations.reject(&:_destroy).map(&:locale).map(&:to_sym)
