@@ -9,7 +9,7 @@ class SiteCustomization::Page < ApplicationRecord
   translates :subtitle,    touch: true
   translates :content,     touch: true
 
-  #validates_translation :title, presence: true
+  validates_translation :title, presence: true
   validates :slug, presence: true,
                    uniqueness: { case_sensitive: false },
                    format: { with: /\A[0-9a-zA-Z\-_]*\Z/, message: :slug_format }

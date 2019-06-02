@@ -8,8 +8,8 @@ class Banner < ApplicationRecord
   translates :title,       touch: true
   translates :description, touch: true
 
-  #validates_translation :title, presence: true, length: { minimum: 2 }
-  #validates_translation :description, presence: true
+  validates_translation :title, presence: true, length: { minimum: 2 }
+  validates_translation :description, presence: true
 
   validates :target_url, presence: true
   validates :post_started_at, presence: true

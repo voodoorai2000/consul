@@ -19,7 +19,7 @@ class Legislation::Question < ApplicationRecord
   accepts_nested_attributes_for :question_options, reject_if: proc { |attributes| attributes.all? { |k, v| v.blank? } }, allow_destroy: true
 
   validates :process, presence: true
-  #validates_translation :title, presence: true
+  validates_translation :title, presence: true
 
   scope :sorted, -> { order("id ASC") }
 
