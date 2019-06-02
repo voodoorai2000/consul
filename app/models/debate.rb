@@ -27,8 +27,8 @@ class Debate < ApplicationRecord
   belongs_to :geozone
   has_many :comments, as: :commentable
 
-  validates_translation :title, presence: true, length: { in: 4..Debate.title_max_length }
-  validates_translation :description, presence: true, length: { in: 10..Debate.description_max_length }
+  validates :title, presence: true, length: { in: 4..Debate.title_max_length }
+  validates :description, presence: true, length: { in: 10..Debate.description_max_length }
   validates :author, presence: true
 
   validates :terms_of_service, acceptance: { allow_nil: false }, on: :create

@@ -22,7 +22,7 @@ class Budget < ApplicationRecord
 
   CURRENCY_SYMBOLS = %w(€ $ £ ¥).freeze
 
-  validates_translation :name, presence: true
+  validates :name, presence: true
   validates :phase, inclusion: { in: Budget::Phase::PHASE_KINDS }
   validates :currency_symbol, presence: true
   validates :slug, presence: true, format: /\A[a-z0-9\-_]+\z/

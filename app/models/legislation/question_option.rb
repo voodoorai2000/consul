@@ -11,5 +11,5 @@ class Legislation::QuestionOption < ApplicationRecord
   has_many :answers, class_name: "Legislation::Answer", foreign_key: "legislation_question_id", dependent: :destroy, inverse_of: :question
 
   validates :question, presence: true
-  validates_translation :value, presence: true
+  validates :value, presence: true
 end

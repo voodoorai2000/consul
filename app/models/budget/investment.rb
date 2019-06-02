@@ -48,8 +48,8 @@ class Budget
     has_many :comments, -> {where(valuation: false)}, as: :commentable, class_name: "Comment"
     has_many :valuations, -> {where(valuation: true)}, as: :commentable, class_name: "Comment"
 
-    validates_translation :title, presence: true, length: { in: 4..Budget::Investment.title_max_length }
-    validates_translation :description, presence: true, length: { maximum: Budget::Investment.description_max_length }
+    validates :title, presence: true, length: { in: 4..Budget::Investment.title_max_length }
+    validates :description, presence: true, length: { maximum: Budget::Investment.description_max_length }
 
     validates :author, presence: true
     validates :heading_id, presence: true

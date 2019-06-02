@@ -47,10 +47,10 @@ class Proposal < ApplicationRecord
   has_many :dashboard_actions, through: :dashboard_executed_actions, class_name: "Dashboard::Action"
   has_many :polls, as: :related
 
-  validates_translation :title, presence: true, length: { in: 4..Proposal.title_max_length }
-  validates_translation :description, length: { maximum: Proposal.description_max_length }
-  validates_translation :summary, presence: true
-  validates_translation :retired_explanation, presence: true, unless: -> { retired_at.blank? }
+  validates :title, presence: true, length: { in: 4..Proposal.title_max_length }
+  validates :description, length: { maximum: Proposal.description_max_length }
+  validates :summary, presence: true
+  validates :retired_explanation, presence: true, unless: -> { retired_at.blank? }
 
   validates :author, presence: true
   validates :responsible_name, presence: true, unless: :skip_user_verification?

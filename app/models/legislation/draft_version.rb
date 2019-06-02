@@ -15,8 +15,8 @@ class Legislation::DraftVersion < ApplicationRecord
   belongs_to :process, class_name: "Legislation::Process", foreign_key: "legislation_process_id"
   has_many :annotations, class_name: "Legislation::Annotation", foreign_key: "legislation_draft_version_id", dependent: :destroy
 
-  validates_translation :title, presence: true
-  validates_translation :body, presence: true
+  validates :title, presence: true
+  validates :body, presence: true
   validates :status, presence: true, inclusion: { in: VALID_STATUSES }
 
   scope :published, -> { where(status: "published").order("id DESC") }

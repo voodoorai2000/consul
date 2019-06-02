@@ -23,7 +23,7 @@ class Budget
 
     has_many :headings, dependent: :destroy
 
-    validates_translation :name, presence: true
+    validates :name, presence: true
     validates :budget_id, presence: true
     validates :slug, presence: true, format: /\A[a-z0-9\-_]+\z/
 

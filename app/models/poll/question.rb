@@ -18,7 +18,7 @@ class Poll::Question < ApplicationRecord
   has_many :partial_results
   belongs_to :proposal
 
-  validates_translation :title, presence: true, length: { minimum: 4 }
+  validates :title, presence: true, length: { minimum: 4 }
   validates :author, presence: true
   validates :poll_id, presence: true, if: Proc.new { |question| question.poll.nil? }
 
