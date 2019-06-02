@@ -63,7 +63,7 @@ class Budget
     end
 
     class Translation < Globalize::ActiveRecord::Translation
-      delegate :budget, to: :globalized_model
+      delegate :budget, to: :translated_model
 
       validate :name_uniqueness_by_budget
 
