@@ -18,6 +18,8 @@ class Comment < ApplicationRecord
 
   translates :body, touch: true
 
+  accepts_nested_attributes_for :translations, allow_destroy: true
+
   validates :body, presence: true
   validates :user, presence: true
 

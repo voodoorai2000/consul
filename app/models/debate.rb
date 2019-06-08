@@ -23,6 +23,8 @@ class Debate < ApplicationRecord
   translates :title, touch: true
   translates :description, touch: true
 
+  accepts_nested_attributes_for :translations, allow_destroy: true
+
   belongs_to :author, -> { with_hidden }, class_name: "User", foreign_key: "author_id"
   belongs_to :geozone
   has_many :comments, as: :commentable

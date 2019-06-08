@@ -6,6 +6,8 @@ class Legislation::Question < ApplicationRecord
 
   translates :title, touch: true
 
+  accepts_nested_attributes_for :translations, allow_destroy: true
+
   acts_as_paranoid column: :hidden_at
 
   belongs_to :author, -> { with_hidden }, class_name: "User", foreign_key: "author_id"

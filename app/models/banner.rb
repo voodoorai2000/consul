@@ -8,6 +8,8 @@ class Banner < ApplicationRecord
   translates :title,       touch: true
   translates :description, touch: true
 
+  accepts_nested_attributes_for :translations, allow_destroy: true
+
   validates :title, presence: true, length: { minimum: 2 }
   validates :description, presence: true
 

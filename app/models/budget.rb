@@ -8,6 +8,8 @@ class Budget < ApplicationRecord
 
   translates :name, touch: true
 
+  accepts_nested_attributes_for :translations, allow_destroy: true
+
   # class Translation
   #   validate :name_uniqueness_by_budget
 

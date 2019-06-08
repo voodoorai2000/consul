@@ -5,6 +5,8 @@ class Legislation::QuestionOption < ApplicationRecord
 
   translates :value, touch: true
 
+  accepts_nested_attributes_for :translations, allow_destroy: true
+
   acts_as_paranoid column: :hidden_at
 
   belongs_to :question, class_name: "Legislation::Question", foreign_key: "legislation_question_id", inverse_of: :question_options

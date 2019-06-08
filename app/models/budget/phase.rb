@@ -13,6 +13,8 @@ class Budget
     translates :summary, touch: true
     translates :description, touch: true
 
+    accepts_nested_attributes_for :translations, allow_destroy: true
+
     belongs_to :budget
     belongs_to :next_phase, class_name: "Budget::Phase", foreign_key: :next_phase_id
     has_one :prev_phase, class_name: "Budget::Phase", foreign_key: :next_phase_id

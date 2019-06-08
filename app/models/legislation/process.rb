@@ -14,6 +14,8 @@ class Legislation::Process < ApplicationRecord
   translates :milestones_summary, touch: true
   translates :homepage,           touch: true
 
+  accepts_nested_attributes_for :translations, allow_destroy: true
+
   documentable max_documents_allowed: 3,
                max_file_size: 3.megabytes,
                accepted_content_types: [ "application/pdf" ]

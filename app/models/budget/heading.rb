@@ -7,6 +7,9 @@ class Budget
     OSM_DISTRICT_LEVEL_ZOOM = 12.freeze
 
     translates :name, touch: true
+
+    accepts_nested_attributes_for :translations, allow_destroy: true
+
     #translation_class_delegate :budget
 
     # class Translation

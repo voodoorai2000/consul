@@ -9,6 +9,8 @@ class SiteCustomization::Page < ApplicationRecord
   translates :subtitle,    touch: true
   translates :content,     touch: true
 
+  accepts_nested_attributes_for :translations, allow_destroy: true
+
   validates :title, presence: true
   validates :slug, presence: true,
                    uniqueness: { case_sensitive: false },

@@ -5,6 +5,9 @@ class Budget
     extend Mobility
 
     translates :name, touch: true
+
+    accepts_nested_attributes_for :translations, allow_destroy: true
+
     #translation_class_delegate :budget
 
     # class Translation

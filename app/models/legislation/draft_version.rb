@@ -10,6 +10,8 @@ class Legislation::DraftVersion < ApplicationRecord
   translates :body_html, touch: true
   translates :toc_html,  touch: true
 
+  accepts_nested_attributes_for :translations, allow_destroy: true
+
   acts_as_paranoid column: :hidden_at
 
   belongs_to :process, class_name: "Legislation::Process", foreign_key: "legislation_process_id"

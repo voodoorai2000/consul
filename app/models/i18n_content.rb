@@ -8,6 +8,8 @@ class I18nContent < ApplicationRecord
 
   translates :value, touch: true
 
+  accepts_nested_attributes_for :translations, allow_destroy: true
+
   # flat_hash returns a flattened hash, a hash with a single level of
   # depth in which each key is composed from the keys of the original
   # hash (whose value is not a hash) by typing in the key of the route

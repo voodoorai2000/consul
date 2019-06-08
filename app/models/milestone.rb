@@ -10,6 +10,8 @@ class Milestone < ApplicationRecord
 
   translates :title, :description, touch: true
 
+  accepts_nested_attributes_for :translations, allow_destroy: true
+
   #translation_class_delegate :status_id
 
   belongs_to :milestoneable, polymorphic: true

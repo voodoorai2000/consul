@@ -12,6 +12,8 @@ class Widget::Card < ApplicationRecord
   translates :description, touch: true
   translates :link_text,   touch: true
 
+  accepts_nested_attributes_for :translations, allow_destroy: true
+
   def self.header
     where(header: true)
   end
