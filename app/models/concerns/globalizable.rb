@@ -7,10 +7,6 @@ module Globalizable
       translations.reject(&:_destroy).map(&:locale).map(&:to_sym)
     end
 
-    # def description
-    #   self.read_attribute(:description).try :html_safe
-    # end
-
     def self.translation_class
       self::Translation
     end
