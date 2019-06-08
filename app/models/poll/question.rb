@@ -48,7 +48,7 @@ class Poll::Question < ApplicationRecord
       self.author = proposal.author
       self.author_visible_name = proposal.author.name
       self.proposal_id = proposal.id
-      send(:"#{localized_attr_name_for(:title, Mobility.locale)}=", proposal.title)
+      send("title_#{Mobility.normalize_locale(Mobility.locale)}=", proposal.title)
     end
   end
 
