@@ -224,7 +224,7 @@ section "Creating Poll Questions from Proposals" do
     question.copy_attributes_from_proposal(proposal)
     title = question.title
     I18n.available_locales.map do |locale|
-      Globalize.with_locale(locale) do
+      Mobility.with_locale(locale) do
         question.title = "#{title} (#{locale})"
       end
     end
