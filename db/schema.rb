@@ -161,8 +161,9 @@ ActiveRecord::Schema.define(version: 20190429125842) do
 
   create_table "budget_groups", force: :cascade do |t|
     t.integer "budget_id"
+    t.string  "name",                 limit: 50
     t.string  "slug"
-    t.integer "max_votable_headings", default: 1
+    t.integer "max_votable_headings",            default: 1
     t.index ["budget_id"], name: "index_budget_groups_on_budget_id", using: :btree
   end
 
@@ -178,10 +179,11 @@ ActiveRecord::Schema.define(version: 20190429125842) do
 
   create_table "budget_headings", force: :cascade do |t|
     t.integer "group_id"
+    t.string  "name",                 limit: 50
     t.bigint  "price"
     t.integer "population"
     t.string  "slug"
-    t.boolean "allow_custom_content", default: false
+    t.boolean "allow_custom_content",            default: false
     t.text    "latitude"
     t.text    "longitude"
     t.index ["group_id"], name: "index_budget_headings_on_group_id", using: :btree
@@ -293,6 +295,8 @@ ActiveRecord::Schema.define(version: 20190429125842) do
     t.integer  "budget_id"
     t.integer  "next_phase_id"
     t.string   "kind",                         null: false
+    t.text     "summary"
+    t.text     "description"
     t.datetime "starts_at"
     t.datetime "ends_at"
     t.boolean  "enabled",       default: true
@@ -334,6 +338,7 @@ ActiveRecord::Schema.define(version: 20190429125842) do
   end
 
   create_table "budgets", force: :cascade do |t|
+    t.string   "name",                          limit: 80
     t.string   "currency_symbol",               limit: 10
     t.string   "phase",                         limit: 40, default: "accepting"
     t.datetime "created_at",                                                     null: false
@@ -708,12 +713,12 @@ ActiveRecord::Schema.define(version: 20190429125842) do
     t.text     "summary"
     t.text     "description"
     t.text     "additional_info"
-    t.integer  "legislation_process_id", null: false
-    t.string   "locale",                 null: false
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.integer  "legislation_process_id",               null: false
+    t.string   "locale",                               null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
     t.text     "milestones_summary"
-    t.text     "homepage"
+    t.text     "homepage",               default: "f"
     t.datetime "hidden_at"
     t.index ["hidden_at"], name: "index_legislation_process_translations_on_hidden_at", using: :btree
     t.index ["legislation_process_id"], name: "index_199e5fed0aca73302243f6a1fca885ce10cdbb55", using: :btree
