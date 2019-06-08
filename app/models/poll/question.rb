@@ -4,12 +4,12 @@ class Poll::Question < ApplicationRecord
   include ActsAsParanoidAliases
   extend Mobility
 
+  acts_as_paranoid column: :hidden_at
+
   translates :title, touch: true
 
   accepts_nested_attributes_for :translations, allow_destroy: true
   include Globalizable
-
-  acts_as_paranoid column: :hidden_at
 
   belongs_to :poll
   belongs_to :author, -> { with_hidden }, class_name: "User", foreign_key: "author_id"

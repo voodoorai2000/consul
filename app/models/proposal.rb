@@ -24,6 +24,9 @@ class Proposal < ApplicationRecord
 
   RETIRE_OPTIONS = %w[duplicated started unfeasible done other]
 
+  acts_as_votable
+  acts_as_paranoid column: :hidden_at
+
   translates :title, touch: true
   translates :description, touch: true
   translates :summary, touch: true
@@ -31,9 +34,6 @@ class Proposal < ApplicationRecord
 
   accepts_nested_attributes_for :translations, allow_destroy: true
   include Globalizable
-
-  acts_as_votable
-  acts_as_paranoid column: :hidden_at
 
   documentable max_documents_allowed: 3,
                max_file_size: 3.megabytes,

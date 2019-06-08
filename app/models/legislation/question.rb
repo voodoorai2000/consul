@@ -3,12 +3,12 @@ class Legislation::Question < ApplicationRecord
   include Notifiable
   extend Mobility
 
+  acts_as_paranoid column: :hidden_at
+
   translates :title, touch: true
 
   accepts_nested_attributes_for :translations, allow_destroy: true
   include Globalizable
-
-  acts_as_paranoid column: :hidden_at
 
   belongs_to :author, -> { with_hidden }, class_name: "User", foreign_key: "author_id"
   belongs_to :process, class_name: "Legislation::Process", foreign_key: "legislation_process_id"

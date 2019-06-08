@@ -6,6 +6,9 @@ class Legislation::Process < ApplicationRecord
   include Documentable
   extend Mobility
 
+  acts_as_paranoid column: :hidden_at
+  acts_as_taggable_on :customs
+
   translates :title,              touch: true
   translates :summary,            touch: true
   translates :description,        touch: true
@@ -19,9 +22,6 @@ class Legislation::Process < ApplicationRecord
   documentable max_documents_allowed: 3,
                max_file_size: 3.megabytes,
                accepted_content_types: [ "application/pdf" ]
-
-  acts_as_paranoid column: :hidden_at
-  acts_as_taggable_on :customs
 
   PHASES_AND_PUBLICATIONS = %i[homepage_phase draft_phase debate_phase allegations_phase
                                proposals_phase draft_publication result_publication].freeze

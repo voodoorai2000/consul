@@ -14,9 +14,9 @@ class Poll < ApplicationRecord
   translates :description, touch: true
 
   accepts_nested_attributes_for :translations, allow_destroy: true
-  include Globalizable
 
   acts_as_paranoid column: :hidden_at
+  include Globalizable
 
   RECOUNT_DURATION = 1.week
 

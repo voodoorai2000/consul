@@ -22,6 +22,9 @@ class Budget
     include Randomizable
     extend Mobility
 
+    acts_as_votable
+    acts_as_paranoid column: :hidden_at
+
     translates :title, touch: true
     translates :description, touch: true
 
@@ -31,9 +34,6 @@ class Budget
     documentable max_documents_allowed: 3,
                  max_file_size: 3.megabytes,
                  accepted_content_types: [ "application/pdf" ]
-
-    acts_as_votable
-    acts_as_paranoid column: :hidden_at
 
     belongs_to :author, -> { with_hidden }, class_name: "User", foreign_key: "author_id"
     belongs_to :heading

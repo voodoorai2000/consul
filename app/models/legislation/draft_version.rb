@@ -3,6 +3,8 @@ class Legislation::DraftVersion < ApplicationRecord
   include ActsAsParanoidAliases
   extend Mobility
 
+  acts_as_paranoid column: :hidden_at
+
   translates :title,     touch: true
   translates :changelog, touch: true
   translates :body,      touch: true
@@ -11,8 +13,6 @@ class Legislation::DraftVersion < ApplicationRecord
 
   accepts_nested_attributes_for :translations, allow_destroy: true
   include Globalizable
-
-  acts_as_paranoid column: :hidden_at
 
   belongs_to :process, class_name: "Legislation::Process", foreign_key: "legislation_process_id"
   has_many :annotations, class_name: "Legislation::Annotation", foreign_key: "legislation_draft_version_id", dependent: :destroy
