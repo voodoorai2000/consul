@@ -20,9 +20,9 @@ class Poll::Question::Answer < ApplicationRecord
   validates :title, presence: true
   validates :given_order, presence: true, uniqueness: { scope: :question_id }
 
-  def description
-    self[:description].try :html_safe
-  end
+  # def description
+  #   self[:description].try :html_safe
+  # end
 
   def self.order_answers(ordered_array)
     ordered_array.each_with_index do |answer_id, order|
