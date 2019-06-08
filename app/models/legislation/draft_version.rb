@@ -1,7 +1,6 @@
 class Legislation::DraftVersion < ApplicationRecord
   VALID_STATUSES = %w(draft published)
   include ActsAsParanoidAliases
-  include Globalizable
   extend Mobility
 
   translates :title,     touch: true
@@ -11,6 +10,7 @@ class Legislation::DraftVersion < ApplicationRecord
   translates :toc_html,  touch: true
 
   accepts_nested_attributes_for :translations, allow_destroy: true
+  include Globalizable
 
   acts_as_paranoid column: :hidden_at
 

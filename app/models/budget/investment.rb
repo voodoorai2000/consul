@@ -20,13 +20,13 @@ class Budget
     include Flaggable
     include Milestoneable
     include Randomizable
-    include Globalizable
     extend Mobility
 
     translates :title, touch: true
     translates :description, touch: true
 
     accepts_nested_attributes_for :translations, allow_destroy: true
+    include Globalizable
 
     documentable max_documents_allowed: 3,
                  max_file_size: 3.megabytes,

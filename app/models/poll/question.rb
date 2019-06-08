@@ -2,12 +2,12 @@ class Poll::Question < ApplicationRecord
   include Measurable
   include Searchable
   include ActsAsParanoidAliases
-  include Globalizable
   extend Mobility
 
   translates :title, touch: true
 
   accepts_nested_attributes_for :translations, allow_destroy: true
+  include Globalizable
 
   acts_as_paranoid column: :hidden_at
 

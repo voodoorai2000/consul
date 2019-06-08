@@ -1,7 +1,6 @@
 class Budget
   class Heading < ApplicationRecord
     include Sluggable
-    include Globalizable
     extend Mobility
 
     OSM_DISTRICT_LEVEL_ZOOM = 12.freeze
@@ -9,6 +8,7 @@ class Budget
     translates :name, touch: true
 
     accepts_nested_attributes_for :translations, allow_destroy: true
+    include Globalizable
 
     #translation_class_delegate :budget
 

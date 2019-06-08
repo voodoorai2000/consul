@@ -1,6 +1,5 @@
 class SiteCustomization::Page < ApplicationRecord
   VALID_STATUSES = %w[draft published]
-  include Globalizable
   extend Mobility
 
   has_many :cards, class_name: "Widget::Card", foreign_key: "site_customization_page_id"
@@ -10,6 +9,7 @@ class SiteCustomization::Page < ApplicationRecord
   translates :content,     touch: true
 
   accepts_nested_attributes_for :translations, allow_destroy: true
+  include Globalizable
 
   validates :title, presence: true
   validates :slug, presence: true,

@@ -1,12 +1,12 @@
 class Budget
   class Group < ApplicationRecord
     include Sluggable
-    include Globalizable
     extend Mobility
 
     translates :name, touch: true
 
     accepts_nested_attributes_for :translations, allow_destroy: true
+    include Globalizable
 
     #translation_class_delegate :budget
 

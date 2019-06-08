@@ -7,7 +7,6 @@ class Poll < ApplicationRecord
   include Sluggable
   include StatsVersionable
   include Reportable
-  include Globalizable
   extend Mobility
 
   translates :name,        touch: true
@@ -15,6 +14,7 @@ class Poll < ApplicationRecord
   translates :description, touch: true
 
   accepts_nested_attributes_for :translations, allow_destroy: true
+  include Globalizable
 
   acts_as_paranoid column: :hidden_at
 

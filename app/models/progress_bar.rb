@@ -1,5 +1,4 @@
 class ProgressBar < ApplicationRecord
-  include Globalizable
   extend Mobility
 
   self.inheritance_column = nil
@@ -12,6 +11,7 @@ class ProgressBar < ApplicationRecord
   translates :title, touch: true
 
   accepts_nested_attributes_for :translations, allow_destroy: true
+  include Globalizable
 
   #translation_class_delegate :primary?
 

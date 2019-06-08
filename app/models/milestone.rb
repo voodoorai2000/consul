@@ -1,7 +1,7 @@
 class Milestone < ApplicationRecord
   include Imageable
   include Documentable
-  include Globalizable
+
   extend Mobility
 
   documentable max_documents_allowed: 3,
@@ -11,6 +11,7 @@ class Milestone < ApplicationRecord
   translates :title, :description, touch: true
 
   accepts_nested_attributes_for :translations, allow_destroy: true
+  include Globalizable
 
   #translation_class_delegate :status_id
 

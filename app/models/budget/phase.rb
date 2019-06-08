@@ -1,7 +1,6 @@
 class Budget
   class Phase < ApplicationRecord
     include Sanitizable
-    include Globalizable
     extend Mobility
 
     PHASE_KINDS = %w(drafting informing accepting reviewing selecting valuating publishing_prices balloting
@@ -14,6 +13,7 @@ class Budget
     translates :description, touch: true
 
     accepts_nested_attributes_for :translations, allow_destroy: true
+    include Globalizable
 
     belongs_to :budget
     belongs_to :next_phase, class_name: "Budget::Phase", foreign_key: :next_phase_id

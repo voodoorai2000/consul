@@ -1,12 +1,12 @@
 class AdminNotification < ApplicationRecord
   include Notifiable
-  include Globalizable
   extend Mobility
 
   translates :title, touch: true
   translates :body,  touch: true
 
   accepts_nested_attributes_for :translations, allow_destroy: true
+  include Globalizable
 
   validates :title, presence: true
   validates :body, presence: true

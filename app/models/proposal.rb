@@ -21,7 +21,6 @@ class Proposal < ApplicationRecord
   include Randomizable
   include ActsAsParanoidAliases
   extend Mobility
-  include Globalizable
 
   RETIRE_OPTIONS = %w[duplicated started unfeasible done other]
 
@@ -31,6 +30,7 @@ class Proposal < ApplicationRecord
   translates :retired_explanation, touch: true
 
   accepts_nested_attributes_for :translations, allow_destroy: true
+  include Globalizable
 
   acts_as_votable
   acts_as_paranoid column: :hidden_at

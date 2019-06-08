@@ -3,14 +3,14 @@ class Comment < ApplicationRecord
   include HasPublicAuthor
   include Graphqlable
   include Notifiable
-  include Globalizable
+  include ActsAsParanoidAliases
   extend Mobility
 
   COMMENTABLE_TYPES = %w(Debate Proposal Budget::Investment Poll Topic Legislation::Question
                         Legislation::Annotation Legislation::Proposal).freeze
 
   acts_as_paranoid column: :hidden_at
-  include ActsAsParanoidAliases
+
   acts_as_votable
   has_ancestry touch: true
 
@@ -19,12 +19,11 @@ class Comment < ApplicationRecord
   translates :body, touch: true
 
   accepts_nested_attributes_for :translations, allow_destroy: true
+  include Globalizable
 
   validates :body, presence: true
   validates :user, presence: true
-
   validates :commentable_type, inclusion: { in: COMMENTABLE_TYPES }
-
   validate :validate_body_length
   validate :comment_valuation, if: -> { valuation }
 
@@ -145,4 +144,5 @@ class Comment < ApplicationRecord
         errors.add(:valuation, :cannot_comment_valuation)
       end
     end
+
 end

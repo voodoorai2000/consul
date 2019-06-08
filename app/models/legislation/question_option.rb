@@ -1,11 +1,11 @@
 class Legislation::QuestionOption < ApplicationRecord
   include ActsAsParanoidAliases
-  include Globalizable
   extend Mobility
 
   translates :value, touch: true
 
   accepts_nested_attributes_for :translations, allow_destroy: true
+  include Globalizable
 
   acts_as_paranoid column: :hidden_at
 

@@ -3,12 +3,12 @@ class Budget < ApplicationRecord
   include Sluggable
   include StatsVersionable
   include Reportable
-  include Globalizable
   extend Mobility
 
   translates :name, touch: true
 
   accepts_nested_attributes_for :translations, allow_destroy: true
+  include Globalizable
 
   # class Translation
   #   validate :name_uniqueness_by_budget
