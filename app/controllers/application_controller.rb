@@ -1,7 +1,6 @@
 require "application_responder"
 
 class ApplicationController < ActionController::Base
-  include GlobalizeFallbacks
   include HasFilters
   include HasOrders
   include AccessDeniedHandler
@@ -54,7 +53,7 @@ class ApplicationController < ActionController::Base
       end
 
       I18n.locale = locale
-      Globalize.locale = I18n.locale
+      Mobility.locale = I18n.locale
     end
 
     def set_layout

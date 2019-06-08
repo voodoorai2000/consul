@@ -9,14 +9,20 @@ class CreateProgressBars < ActiveRecord::Migration[4.2]
     end
 
     reversible do |change|
-      change.up do
-        ProgressBar.create_translation_table!({
-          title: :string
-        })
+      create_table :progress_bar_translations, force: :cascade do |t|
+        t.string   :title
+
+        t.integer  :progress_bar_id, null: false
+        t.string   :locale,          null: false
+
+        t.timestamps null: false
+
+        t.index [:progress_bar_id], name: "index_progress_bar_translations_on_progress_bar_id", using: :btree
+        t.index [:locale], name: "index_progress_bar_translations_on_locale", using: :btree
       end
 
       change.down do
-        ProgressBar.drop_translation_table!
+        drop_table :progress_bar_translations
       end
     end
   end

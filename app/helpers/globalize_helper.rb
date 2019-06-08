@@ -11,12 +11,13 @@ module GlobalizeHelper
   end
 
   def display_translation?(resource, locale)
-    if !resource || resource.translations.blank? ||
-       resource.locales_not_marked_for_destruction.include?(I18n.locale)
-      locale == I18n.locale
-    else
-      locale == resource.translations.first.locale
-    end
+    # if !resource || resource.translations.blank? ||
+    #    resource.locales_not_marked_for_destruction.include?(I18n.locale)
+    #   locale == I18n.locale
+    # else
+    #   locale == resource.translations.first.locale
+    # end
+    locale == I18n.locale
   end
 
   def display_translation_style(resource, locale)
@@ -28,7 +29,7 @@ module GlobalizeHelper
   end
 
   def enable_translation_style(resource, locale)
-    "display: none;" unless enable_locale?(resource, locale)
+    "display: none;" unless enable_locale?(resource, locale.to_sym)
   end
 
   def enable_locale?(resource, locale)
@@ -44,7 +45,7 @@ module GlobalizeHelper
   end
 
   def globalize(locale, &block)
-    Globalize.with_locale(locale) do
+    Mobility.with_locale(locale) do
       yield
     end
   end

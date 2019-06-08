@@ -1,9 +1,12 @@
 class Poll::Question::Answer < ApplicationRecord
   include Galleryable
   include Documentable
+  extend Mobility
 
   translates :title,       touch: true
   translates :description, touch: true
+
+  accepts_nested_attributes_for :translations, allow_destroy: true
   include Globalizable
 
   documentable max_documents_allowed: 3,
@@ -14,12 +17,12 @@ class Poll::Question::Answer < ApplicationRecord
   belongs_to :question, class_name: "Poll::Question", foreign_key: "question_id"
   has_many :videos, class_name: "Poll::Question::Answer::Video"
 
-  validates_translation :title, presence: true
+  validates :title, presence: true
   validates :given_order, presence: true, uniqueness: { scope: :question_id }
 
-  def description
-    self[:description].try :html_safe
-  end
+  # def description
+  #   self[:description].try :html_safe
+  # end
 
   def self.order_answers(ordered_array)
     ordered_array.each_with_index do |answer_id, order|

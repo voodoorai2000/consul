@@ -1,9 +1,13 @@
 class Legislation::Question < ApplicationRecord
-  acts_as_paranoid column: :hidden_at
   include ActsAsParanoidAliases
   include Notifiable
+  extend Mobility
+
+  acts_as_paranoid column: :hidden_at
 
   translates :title, touch: true
+
+  accepts_nested_attributes_for :translations, allow_destroy: true
   include Globalizable
 
   belongs_to :author, -> { with_hidden }, class_name: "User", foreign_key: "author_id"
@@ -17,7 +21,7 @@ class Legislation::Question < ApplicationRecord
   accepts_nested_attributes_for :question_options, reject_if: proc { |attributes| attributes.all? { |k, v| v.blank? } }, allow_destroy: true
 
   validates :process, presence: true
-  validates_translation :title, presence: true
+  validates :title, presence: true
 
   scope :sorted, -> { order("id ASC") }
 

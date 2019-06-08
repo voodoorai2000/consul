@@ -1,14 +1,17 @@
 class Banner < ApplicationRecord
+  include ActsAsParanoidAliases
+  extend Mobility
 
   acts_as_paranoid column: :hidden_at
-  include ActsAsParanoidAliases
 
   translates :title,       touch: true
   translates :description, touch: true
+
+  accepts_nested_attributes_for :translations, allow_destroy: true
   include Globalizable
 
-  validates_translation :title, presence: true, length: { minimum: 2 }
-  validates_translation :description, presence: true
+  validates :title, presence: true, length: { minimum: 2 }
+  validates :description, presence: true
 
   validates :target_url, presence: true
   validates :post_started_at, presence: true

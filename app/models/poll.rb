@@ -2,16 +2,20 @@ class Poll < ApplicationRecord
   require_dependency "poll/answer"
 
   include Imageable
-  acts_as_paranoid column: :hidden_at
   include ActsAsParanoidAliases
   include Notifiable
   include Sluggable
   include StatsVersionable
   include Reportable
+  extend Mobility
 
   translates :name,        touch: true
   translates :summary,     touch: true
   translates :description, touch: true
+
+  accepts_nested_attributes_for :translations, allow_destroy: true
+
+  acts_as_paranoid column: :hidden_at
   include Globalizable
 
   RECOUNT_DURATION = 1.week
@@ -32,7 +36,7 @@ class Poll < ApplicationRecord
   belongs_to :related, polymorphic: true
   belongs_to :budget
 
-  validates_translation :name, presence: true
+  validates :name, presence: true
   validate :date_range
   validate :only_one_active, unless: :public?
 

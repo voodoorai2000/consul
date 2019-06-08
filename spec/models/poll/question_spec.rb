@@ -34,7 +34,7 @@ RSpec.describe Poll::Question, type: :model do
     context "locale with non-underscored name" do
       before do
         I18n.locale = :"pt-BR"
-        Globalize.locale = I18n.locale
+        Mobility.locale = I18n.locale
       end
 
       it "correctly creates a translation" do
@@ -43,7 +43,7 @@ RSpec.describe Poll::Question, type: :model do
 
         expect(poll_question.title).to eq(proposal.title)
         expect(translation.title).to eq(proposal.title)
-        expect(translation.locale).to eq(:"pt-BR")
+        expect(translation.locale).to eq("pt-BR")
       end
     end
   end

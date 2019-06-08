@@ -1,11 +1,14 @@
 class I18nContent < ApplicationRecord
+  extend Mobility
 
   scope :by_key,          ->(key) { where(key: key) }
 
   validates :key, uniqueness: true
 
   translates :value, touch: true
-  globalize_accessors
+
+  accepts_nested_attributes_for :translations, allow_destroy: true
+  include Globalizable
 
   # flat_hash returns a flattened hash, a hash with a single level of
   # depth in which each key is composed from the keys of the original

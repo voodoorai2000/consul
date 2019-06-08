@@ -37,7 +37,7 @@ section "Creating polls" do
   Poll.find_each do |poll|
     name = poll.name
     I18n.available_locales.map do |locale|
-      Globalize.with_locale(locale) do
+      Mobility.with_locale(locale) do
         poll.name = "#{name} (#{locale})"
         poll.summary = "Summary for locale #{locale}"
         poll.description = "Description for locale #{locale}"
@@ -56,7 +56,7 @@ section "Creating Poll Questions & Answers" do
                                     title: question_title,
                                     poll: poll)
       I18n.available_locales.map do |locale|
-        Globalize.with_locale(locale) do
+        Mobility.with_locale(locale) do
           question.title = "#{question_title} (#{locale})"
         end
       end
@@ -68,7 +68,7 @@ section "Creating Poll Questions & Answers" do
                                             description: description,
                                             given_order: index + 1)
         I18n.available_locales.map do |locale|
-          Globalize.with_locale(locale) do
+          Mobility.with_locale(locale) do
             answer.title = "#{title} (#{locale})"
             answer.description = "#{description} (#{locale})"
           end
@@ -224,7 +224,7 @@ section "Creating Poll Questions from Proposals" do
     question.copy_attributes_from_proposal(proposal)
     title = question.title
     I18n.available_locales.map do |locale|
-      Globalize.with_locale(locale) do
+      Mobility.with_locale(locale) do
         question.title = "#{title} (#{locale})"
       end
     end
@@ -236,7 +236,7 @@ section "Creating Poll Questions from Proposals" do
                                           description: description,
                                           given_order: index + 1)
       I18n.available_locales.map do |locale|
-        Globalize.with_locale(locale) do
+        Mobility.with_locale(locale) do
           answer.title = "#{title} (#{locale})"
           answer.description = "#{description} (#{locale})"
         end
@@ -254,7 +254,7 @@ section "Creating Successful Proposals" do
     question.copy_attributes_from_proposal(proposal)
     title = question.title
     I18n.available_locales.map do |locale|
-      Globalize.with_locale(locale) do
+      Mobility.with_locale(locale) do
         question.title = "#{title} (#{locale})"
       end
     end
@@ -266,7 +266,7 @@ section "Creating Successful Proposals" do
                                           description: description,
                                           given_order: index + 1)
       I18n.available_locales.map do |locale|
-        Globalize.with_locale(locale) do
+        Mobility.with_locale(locale) do
           answer.title = "#{title} (#{locale})"
           answer.description = "#{description} (#{locale})"
         end

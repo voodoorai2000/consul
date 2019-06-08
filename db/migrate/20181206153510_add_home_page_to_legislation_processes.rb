@@ -4,7 +4,7 @@ class AddHomePageToLegislationProcesses < ActiveRecord::Migration[4.2]
 
     reversible do |dir|
       dir.up do
-        Legislation::Process.add_translation_fields! homepage: :text
+        add_column :legislation_process_translations, :homepage, :text, default: false
       end
 
       dir.down do

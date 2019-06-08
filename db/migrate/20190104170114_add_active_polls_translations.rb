@@ -1,16 +1,21 @@
 class AddActivePollsTranslations < ActiveRecord::Migration[4.2]
 
   def self.up
-    ActivePoll.create_translation_table!(
-      {
-        description: :text
-      },
-      { migrate_data: true }
-    )
+    create_table :active_poll_translations, force: :cascade do |t|
+      t.text     :description
+
+      t.integer  :active_poll_id, null: false
+      t.string   :locale,         null: false
+
+      t.timestamps null: false
+
+      t.index [:active_poll_id], name: "index_active_poll_translations_on_active_poll_id", using: :btree
+      t.index [:locale], name: "index_active_poll_translations_on_locale", using: :btree
+    end
   end
 
   def self.down
-    ActivePollPoll.drop_translation_table!
+    drop_table :active_poll_translations
   end
 
 end

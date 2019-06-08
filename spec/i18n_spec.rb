@@ -18,8 +18,11 @@ describe "I18n" do
 
   context "Plurals" do
 
+    let!(:default_enforce) { I18n.enforce_available_locales }
+
     after do
       I18n.backend.reload!
+      I18n.enforce_available_locales = default_enforce
     end
 
     it "returns plural rule if translation present" do

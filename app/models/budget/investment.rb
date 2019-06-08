@@ -13,12 +13,6 @@ class Budget
     include Imageable
     include Mappable
     include Documentable
-    documentable max_documents_allowed: 3,
-                 max_file_size: 3.megabytes,
-                 accepted_content_types: [ "application/pdf" ]
-
-    acts_as_votable
-    acts_as_paranoid column: :hidden_at
     include ActsAsParanoidAliases
     include Relationable
     include Notifiable
@@ -26,10 +20,20 @@ class Budget
     include Flaggable
     include Milestoneable
     include Randomizable
+    extend Mobility
+
+    acts_as_votable
+    acts_as_paranoid column: :hidden_at
 
     translates :title, touch: true
     translates :description, touch: true
+
+    accepts_nested_attributes_for :translations, allow_destroy: true
     include Globalizable
+
+    documentable max_documents_allowed: 3,
+                 max_file_size: 3.megabytes,
+                 accepted_content_types: [ "application/pdf" ]
 
     belongs_to :author, -> { with_hidden }, class_name: "User", foreign_key: "author_id"
     belongs_to :heading
@@ -46,8 +50,8 @@ class Budget
     has_many :comments, -> {where(valuation: false)}, as: :commentable, class_name: "Comment"
     has_many :valuations, -> {where(valuation: true)}, as: :commentable, class_name: "Comment"
 
-    validates_translation :title, presence: true, length: { in: 4..Budget::Investment.title_max_length }
-    validates_translation :description, presence: true, length: { maximum: Budget::Investment.description_max_length }
+    validates :title, presence: true, length: { in: 4..Budget::Investment.title_max_length }
+    validates :description, presence: true, length: { maximum: Budget::Investment.description_max_length }
 
     validates :author, presence: true
     validates :heading_id, presence: true

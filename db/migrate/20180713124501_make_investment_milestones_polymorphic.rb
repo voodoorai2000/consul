@@ -13,14 +13,22 @@ class MakeInvestmentMilestonesPolymorphic < ActiveRecord::Migration[4.2]
 
     reversible do |change|
       change.up do
-        Milestone.create_translation_table!({
-          title: :string,
-          description: :text
-        })
+        create_table :milestone_translations do |t|
+          t.string   :title
+          t.text     :description
+
+          t.integer  :milestone_id, null: false
+          t.string   :locale,       null: false
+
+          t.timestamps null: false
+
+          t.index [:milestone_id], name: "index_milestone_translations_on_milestone_id", using: :btree
+          t.index [:locale], name: "index_milestone_translations_on_locale", using: :btree
+        end
       end
 
       change.down do
-        Milestone.drop_translation_table!
+        drop_table :milestone_translations
       end
     end
   end

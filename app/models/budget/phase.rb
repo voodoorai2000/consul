@@ -1,5 +1,8 @@
 class Budget
   class Phase < ApplicationRecord
+    include Sanitizable
+    extend Mobility
+
     PHASE_KINDS = %w(drafting informing accepting reviewing selecting valuating publishing_prices balloting
                 reviewing_ballots finished).freeze
     PUBLISHED_PRICES_PHASES = %w(publishing_prices balloting reviewing_ballots finished).freeze
@@ -8,15 +11,16 @@ class Budget
 
     translates :summary, touch: true
     translates :description, touch: true
+
+    accepts_nested_attributes_for :translations, allow_destroy: true
     include Globalizable
-    include Sanitizable
 
     belongs_to :budget
     belongs_to :next_phase, class_name: "Budget::Phase", foreign_key: :next_phase_id
     has_one :prev_phase, class_name: "Budget::Phase", foreign_key: :next_phase_id
 
-    validates_translation :summary, length: { maximum: SUMMARY_MAX_LENGTH }
-    validates_translation :description, length: { maximum: DESCRIPTION_MAX_LENGTH }
+    validates :summary, length: { maximum: SUMMARY_MAX_LENGTH }
+    validates :description, length: { maximum: DESCRIPTION_MAX_LENGTH }
     validates :budget, presence: true
     validates :kind, presence: true, uniqueness: { scope: :budget }, inclusion: { in: PHASE_KINDS }
     validate :invalid_dates_range?
@@ -100,14 +104,14 @@ class Budget
         PHASE_KINDS.index(kind) >= PHASE_KINDS.index(phase)
       end
 
-    class Translation < Globalize::ActiveRecord::Translation
-      before_validation :sanitize_description
+    # class Translation < Globalize::ActiveRecord::Translation
+    #   before_validation :sanitize_description
 
-      private
+    #   private
 
-        def sanitize_description
-          self.description = WYSIWYGSanitizer.new.sanitize(description)
-        end
-    end
+    #     def sanitize_description
+    #       self.description = WYSIWYGSanitizer.new.sanitize(description)
+    #     end
+    # end
   end
 end

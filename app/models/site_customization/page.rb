@@ -1,13 +1,17 @@
 class SiteCustomization::Page < ApplicationRecord
   VALID_STATUSES = %w[draft published]
+  extend Mobility
+
   has_many :cards, class_name: "Widget::Card", foreign_key: "site_customization_page_id"
 
   translates :title,       touch: true
   translates :subtitle,    touch: true
   translates :content,     touch: true
+
+  accepts_nested_attributes_for :translations, allow_destroy: true
   include Globalizable
 
-  validates_translation :title, presence: true
+  validates :title, presence: true
   validates :slug, presence: true,
                    uniqueness: { case_sensitive: false },
                    format: { with: /\A[0-9a-zA-Z\-_]*\Z/, message: :slug_format }

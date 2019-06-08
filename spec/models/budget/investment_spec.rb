@@ -533,7 +533,7 @@ describe Budget::Investment do
       it "should take into consideration title fallbacks when there is no
           translation for current locale" do
         create(:budget_investment, title: "BBBB")
-        Globalize.with_locale(:es) do
+        Mobility.with_locale(:es) do
           I18n.with_locale(:es) do
             create(:budget_investment, title: "AAAA")
           end
@@ -548,7 +548,7 @@ describe Budget::Investment do
 
       let!(:investment) do
         I18n.with_locale(:es) do
-          Globalize.with_locale(:es) do
+          Mobility.with_locale(:es) do
             create(:budget_investment,
               title_es: "Título del proyecto de inversión",
               description_es: "Descripción del proyecto de inversión")

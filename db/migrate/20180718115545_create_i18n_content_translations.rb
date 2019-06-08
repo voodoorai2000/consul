@@ -6,14 +6,21 @@ class CreateI18nContentTranslations < ActiveRecord::Migration[4.2]
 
     reversible do |dir|
       dir.up do
-        I18nContent.create_translation_table!(
-          { value: :text },
-          { migrate_data: true }
-        )
+        create_table :i18n_content_translations, force: :cascade do |t|
+          t.text     :value
+
+          t.integer  :i18n_content_id, null: false
+          t.string   :locale,          null: false
+
+          t.timestamps null: false
+
+          t.index [:i18n_content_id], name: "index_i18n_content_translations_on_i18n_content_id", using: :btree
+          t.index [:locale], name: "index_i18n_content_translations_on_locale", using: :btree
+        end
       end
 
       dir.down do
-        I18nContent.drop_translation_table!
+        drop_table :i18n_content_translations
       end
     end
   end
